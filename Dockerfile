@@ -12,5 +12,5 @@ RUN apk add make curl ffmpeg python3 && ln -sf python3 /usr/bin/python
 
 RUN curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl && chmod a+rx /usr/local/bin/youtube-dl
 
-WORKDIR $GOPATH/src/github.com/mrauer/grabity
+WORKDIR $GOPATH/src/github.com/mrauer/grabify
 COPY . .

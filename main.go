@@ -25,11 +25,12 @@ const (
 ██    ██ ██   ██ ██   ██ ██   ██ ██ ██         ██    
  ██████  ██   ██ ██   ██ ██████  ██ ██         ██    
                                                    `
-	SOFTWARE_VERSION = "v0.0.1"
-	YOUTUBEDL_CMD    = "youtube-dl --extract-audio --audio-format mp3 --audio-quality 0 %s"
+	SOFTWARE_VERSION = "v0.0.2"
+	YOUTUBEDL_CMD    = "(cd %s && youtube-dl --extract-audio --audio-format mp3 --audio-quality 0 %s)"
 	AMPLIFY_RATIO    = 4
-	FILENAME_CMD     = "ls | grep %s"
+	FILENAME_CMD     = "find %s/ | grep %s"
 	AMPLIFY_CMD      = "ffmpeg -i \"%s\" -filter:a \"volume=%d\" \"%s\" && rm \"%s\""
+	DOWNLOAD_PATH    = "data"
 )
 
 var songs map[int]string
@@ -48,7 +49,7 @@ type result struct {
 }
 
 func amplifyAudio(song_id string) error {
-	input_cmd, err := exec.Command("sh", "-c", fmt.Sprintf(FILENAME_CMD, song_id)).Output()
+	input_cmd, err := exec.Command("sh", "-c", fmt.Sprintf(FILENAME_CMD, DOWNLOAD_PATH, song_id)).Output()
 	if err != nil {
 		return err
 	}
@@ -113,7 +114,7 @@ func main() {
 	fmt.Println("")
 
 	// download the song.
-	cmd := exec.Command("sh", "-c", fmt.Sprintf(YOUTUBEDL_CMD, songs[song_id]))
+	cmd := exec.Command("sh", "-c", fmt.Sprintf(YOUTUBEDL_CMD, DOWNLOAD_PATH, songs[song_id]))
 	cmd.Run()
 
 	// amplifying the audio
