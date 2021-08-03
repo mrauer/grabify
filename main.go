@@ -6,7 +6,6 @@ import (
 	"os"
 	"strconv"
 	"strings"
-	"time"
 
 	"github.com/mrauer/grabify/lib"
 )
@@ -19,10 +18,8 @@ const (
 ██    ██ ██   ██ ██   ██ ██   ██ ██ ██         ██    
  ██████  ██   ██ ██   ██ ██████  ██ ██         ██    
                                                    `
-	SOFTWARE_VERSION       = "v0.0.2"
-	DOWNLOAD_PATH          = "data"
-	PLAYLIST_KW            = "playlist"
-	PLAYLIST_PAUSE_SECONDS = 10
+	SOFTWARE_VERSION = "v0.0.2"
+	PLAYLIST_KW      = "playlist"
 )
 
 var songs map[int]string
@@ -44,15 +41,15 @@ func main() {
 			}
 			for _, track := range tracks {
 				fmt.Println(fmt.Sprintf("Playlist track %s", track))
-				go func(track string) {
-					choices, _ := lib.YoutubeSearch(track, false)
-					if err != nil {
-						return
-					}
-					lib.DownloadTrack(choices[0])
-					lib.AmplifyAudio(choices[0])
-				}(track)
-				time.Sleep(PLAYLIST_PAUSE_SECONDS * time.Second)
+				choices, err := lib.YoutubeSearch(track, false)
+				if err != nil {
+					return
+				}
+				if len(choices) == 0 {
+					return
+				}
+				lib.DownloadTrack(choices[0])
+				lib.AmplifyAudio(choices[0])
 			}
 			return
 		}
@@ -65,6 +62,10 @@ func main() {
 	choices, err := lib.YoutubeSearch(query, true)
 	if err != nil {
 		fmt.Println(err)
+		return
+	}
+	if len(choices) == 0 {
+		fmt.Println("You must have reached the YouTube API limit. Please try again later.")
 		return
 	}
 	fmt.Println("")

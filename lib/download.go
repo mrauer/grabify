@@ -18,7 +18,7 @@ const (
 	DOWNLOAD_PATH   = "data"
 	AMPLIFY_RATIO   = 4
 	TIMEOUT_SECONDS = 2
-	FILENAME_CMD    = "find %s/ | grep %s"
+	FILENAME_CMD    = "find %s/ | grep \"%s\" | grep '.mp3'"
 	AMPLIFY_CMD     = "ffmpeg -i \"%s\" -filter:a \"volume=%d\" \"%s\" && rm \"%s\""
 )
 
@@ -76,7 +76,6 @@ func DownloadTrack(track_id string) error {
 }
 
 func AmplifyAudio(track_id string) error {
-	fmt.Println(fmt.Sprintf("Amplifying the audio by a ratio of %d", AMPLIFY_RATIO))
 	input_cmd, err := exec.Command("sh", "-c", fmt.Sprintf(FILENAME_CMD, DOWNLOAD_PATH, track_id)).Output()
 	if err != nil {
 		return err
