@@ -40,7 +40,7 @@ YOUTUBE_API_KEY=AIzaSyC6cy-xQwZPsqZINASpj2MrBgBWxxxxxxx
 
 ```
 
-**youtube-dl** should be installed as well. See [youtube-dl](https://ytdl-org.github.io/youtube-dl/download.html)
+**youtube-dl** should be installed as well as **ffmpeg**. See [youtube-dl](https://ytdl-org.github.io/youtube-dl/download.html).
 
 
 If you would like to download a playlist from Spotify, then you also need these additional keys:
@@ -101,7 +101,7 @@ Here is how you perform a bulk download:
 ██    ██ ██   ██ ██   ██ ██   ██ ██ ██         ██    
  ██████  ██   ██ ██   ██ ██████  ██ ██         ██    
                                                    
-version v0.0.2
+version v0.0.3
 
 Playlist track Tryo Pas pareil XXV
 Downloading pl4X0EMxAjQ

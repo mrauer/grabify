@@ -23,7 +23,7 @@ linters:
     - prealloc
     - wsl
     - testpackage
-    - nestif
+    # - nestif
     - nakedret
     - gocyclo
     - gocognit
