@@ -18,7 +18,7 @@ const (
 ██    ██ ██   ██ ██   ██ ██   ██ ██ ██         ██    
  ██████  ██   ██ ██   ██ ██████  ██ ██         ██    
                                                    `
-	SOFTWARE_VERSION = "v0.0.2"
+	SOFTWARE_VERSION = "v0.0.3"
 	PLAYLIST_KW      = "playlist"
 )
 
