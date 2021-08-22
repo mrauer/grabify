@@ -43,21 +43,26 @@ func YoutubeSearch(query string, verbose bool) (map[int]string, error) {
 		Timeout: time.Second * TIMEOUT_SECONDS, // Timeout after 2 seconds.
 	}
 	req, err := http.NewRequest(http.MethodGet, url, nil)
+
 	if err != nil {
 		return choices, err
 	}
+
 	res, err := client.Do(req)
+
 	if err != nil {
 		return choices, err
 	}
 	defer res.Body.Close()
 	body, err := ioutil.ReadAll(res.Body)
+
 	if err != nil {
 		return choices, err
 	}
 
 	resp := result{}
 	err = json.Unmarshal(body, &resp)
+
 	if err != nil {
 		return choices, err
 	}
@@ -65,17 +70,20 @@ func YoutubeSearch(query string, verbose bool) (map[int]string, error) {
 	for idx, song := range resp.Items {
 		if verbose {
 			song_title := html.UnescapeString(song.Snippet.Title)
-			fmt.Println(fmt.Sprintf("%d - %s", idx, song_title))
+			fmt.Printf(fmt.Sprintf("%d - %s\n", idx, song_title))
 		}
+
 		choices[idx] = song.Id.VideoId
 	}
+
 	return choices, nil
 }
 
 func DownloadTrack(track_id string) error {
-	fmt.Println(fmt.Sprintf("Downloading %s", track_id))
+	fmt.Printf(fmt.Sprintf("Downloading %s\n", track_id))
 	cmd := exec.Command("sh", "-c", fmt.Sprintf(YOUTUBEDL_CMD, DOWNLOAD_PATH, track_id))
-	cmd.Run()
+	_ = cmd.Run()
+
 	return nil
 }
 
@@ -84,9 +92,11 @@ func AmplifyAudio(track_id string) error {
 	if err != nil {
 		return err
 	}
+
 	input_file := strings.TrimSuffix(string(input_cmd), "\n")
 	output_file := strings.ReplaceAll(input_file, ".mp3", fmt.Sprintf("_%dx.mp3", AMPLIFY_RATIO))
 	cmd := exec.Command("sh", "-c", fmt.Sprintf(AMPLIFY_CMD, input_file, AMPLIFY_RATIO, output_file, input_file))
-	cmd.Run()
+	_ = cmd.Run()
+
 	return nil
 }
