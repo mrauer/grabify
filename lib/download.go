@@ -14,8 +14,8 @@ import (
 )
 
 const (
-	YOUTUBE_API_URL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=%s&key=%s"
-	YOUTUBEDL_CMD   = "(cd %s && youtube-dl --extract-audio --audio-format mp3 --audio-quality 0 %s)"
+	YOUTUBE_API_URL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=%s&type=video&key=%s"
+	YOUTUBEDL_CMD   = "(cd %s && youtube-dl --extract-audio --audio-format mp3 --audio-quality 0 --id %s)"
 	DOWNLOAD_PATH   = "data"
 	AMPLIFY_RATIO   = 2
 	TIMEOUT_SECONDS = 2
@@ -55,6 +55,7 @@ func YoutubeSearch(query string, verbose bool) (map[int]string, error) {
 	if err != nil {
 		return choices, err
 	}
+
 	resp := result{}
 	err = json.Unmarshal(body, &resp)
 	if err != nil {
