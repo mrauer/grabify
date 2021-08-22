@@ -23,7 +23,7 @@ linters:
     - prealloc
     - wsl
     - testpackage
-    - nestif
+    # - nestif
     - nakedret
     - gocyclo
     - gocognit
@@ -36,7 +36,7 @@ linters:
     - godox
     - godot
     - goconst
-    - funlen
+    # - funlen
     - dupl
     - dogsled
     - gomnd

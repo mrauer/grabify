@@ -17,7 +17,7 @@ const (
 	YOUTUBE_API_URL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=%s&type=video&key=%s"
 	YOUTUBEDL_CMD   = "(cd %s && youtube-dl --extract-audio --audio-format mp3 --audio-quality 0 %s)"
 	DOWNLOAD_PATH   = "data"
-	AMPLIFY_RATIO   = 2
+	AMPLIFY_RATIO   = 1
 	TIMEOUT_SECONDS = 2
 	FILENAME_CMD    = "find %s/ | grep \"%s\" | grep '.mp3'"
 	AMPLIFY_CMD     = "ffmpeg -i \"%s\" -filter:a \"volume=%d\" \"%s\" && rm \"%s\""
