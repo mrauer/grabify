@@ -20,6 +20,7 @@ const (
                                                    `
 	SOFTWARE_VERSION = "v0.0.3"
 	PLAYLIST_KW      = "playlist"
+	PLAYLIST_ROUTE_NUM_ARG = 3
 )
 
 var songs map[int]string
@@ -28,7 +29,7 @@ func main() {
 	fmt.Println(SOFTWARE_LOGO)
 	fmt.Println(fmt.Sprintf("version %s\n", SOFTWARE_VERSION))
 	// Spotify playlist.
-	if len(os.Args) == 3 {
+	if len(os.Args) == PLAYLIST_ROUTE_NUM_ARG {
 		if os.Args[1] == PLAYLIST_KW {
 			playlist := os.Args[2]
 			token, err := lib.SpotifyLogin()
