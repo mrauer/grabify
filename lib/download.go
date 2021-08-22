@@ -15,7 +15,7 @@ import (
 
 const (
 	YOUTUBE_API_URL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=%s&type=video&key=%s"
-	YOUTUBEDL_CMD   = "(cd %s && youtube-dl --extract-audio --audio-format mp3 --audio-quality 0 --id %s)"
+	YOUTUBEDL_CMD   = "(cd %s && youtube-dl --extract-audio --audio-format mp3 --audio-quality 0 %s)"
 	DOWNLOAD_PATH   = "data"
 	AMPLIFY_RATIO   = 2
 	TIMEOUT_SECONDS = 2

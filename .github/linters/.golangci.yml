@@ -32,7 +32,6 @@ linters:
     - misspell
     - ineffassign
     - goprintffuncname
-    - gomodguard
     - goheader
     - godox
     - godot
