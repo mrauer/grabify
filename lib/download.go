@@ -3,6 +3,7 @@ package lib
 import (
 	"encoding/json"
 	"fmt"
+	"html"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -16,7 +17,7 @@ const (
 	YOUTUBE_API_URL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=%s&key=%s"
 	YOUTUBEDL_CMD   = "(cd %s && youtube-dl --extract-audio --audio-format mp3 --audio-quality 0 %s)"
 	DOWNLOAD_PATH   = "data"
-	AMPLIFY_RATIO   = 4
+	AMPLIFY_RATIO   = 2
 	TIMEOUT_SECONDS = 2
 	FILENAME_CMD    = "find %s/ | grep \"%s\" | grep '.mp3'"
 	AMPLIFY_CMD     = "ffmpeg -i \"%s\" -filter:a \"volume=%d\" \"%s\" && rm \"%s\""
@@ -59,9 +60,11 @@ func YoutubeSearch(query string, verbose bool) (map[int]string, error) {
 	if err != nil {
 		return choices, err
 	}
+
 	for idx, song := range resp.Items {
 		if verbose {
-			fmt.Println(fmt.Sprintf("%d - %s", idx, song.Snippet.Title))
+			song_title := html.UnescapeString(song.Snippet.Title)
+			fmt.Println(fmt.Sprintf("%d - %s", idx, song_title))
 		}
 		choices[idx] = song.Id.VideoId
 	}
