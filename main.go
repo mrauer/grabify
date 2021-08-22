@@ -18,8 +18,8 @@ const (
 ██    ██ ██   ██ ██   ██ ██   ██ ██ ██         ██    
  ██████  ██   ██ ██   ██ ██████  ██ ██         ██    
                                                    `
-	SOFTWARE_VERSION = "v0.0.3"
-	PLAYLIST_KW      = "playlist"
+	SOFTWARE_VERSION       = "v0.0.3"
+	PLAYLIST_KW            = "playlist"
 	PLAYLIST_ROUTE_NUM_ARG = 3
 )
 
